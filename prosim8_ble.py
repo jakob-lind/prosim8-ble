@@ -46,8 +46,10 @@ class ProSimService(Service):
 
     def send_command(self, command):
         if self.ser is not None:
-            print(f'Sending command {command}')
+            print(f'Sending command "{command}"')
             self.ser.write(f'{command}\r\n'.encode('ascii'))
+            response = self.ser.readLine()
+            print(f'Received response "{response}"')
             return self.ser.readline()
 
 class ControlCharacteristic(Characteristic):
