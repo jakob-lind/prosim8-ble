@@ -50,6 +50,7 @@ class ProSimService(Service):
             self.ser.write(f'{command}\r\n'.encode('ascii'))
             response = self.ser.readline()
             print(f'Received response "{response}"')
+            return response
 
 class ControlCharacteristic(Characteristic):
     CTL_CHARACTERISTIC_UUID = "00000003-710e-4a5b-8d75-3e5b444bc3cf"
