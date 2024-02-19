@@ -19,6 +19,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+from ble_gatt_server.bletools import BleTools
 import dbus
 import dbus.mainloop.glib
 import dbus.exceptions
@@ -26,7 +27,6 @@ try:
   from gi.repository import GObject
 except ImportError:
     import gobject as GObject
-from bletools import BleTools
 
 BLUEZ_SERVICE_NAME = "org.bluez"
 GATT_MANAGER_IFACE = "org.bluez.GattManager1"
