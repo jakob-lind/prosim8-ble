@@ -48,9 +48,8 @@ class ProSimService(Service):
         if self.ser is not None:
             print(f'Sending command "{command}"')
             self.ser.write(f'{command}\r\n'.encode('ascii'))
-            response = self.ser.readLine()
+            response = self.ser.readline()
             print(f'Received response "{response}"')
-            return self.ser.readline()
 
 class ControlCharacteristic(Characteristic):
     CTL_CHARACTERISTIC_UUID = "00000003-710e-4a5b-8d75-3e5b444bc3cf"
