@@ -27,7 +27,7 @@ from ble_gatt_server.advertisement import Advertisement
 from ble_gatt_server.service import Application, Service, Characteristic, Descriptor
 from prosim8.api import Prosim8
 
-GATT_CHRC_IFACE = "org.bluez.GattCharacteristic1"
+COMPORT = "/dev/ttyAC0"
 
 class ProSimAdvertisement(Advertisement):
     def __init__(self, index):
@@ -41,9 +41,11 @@ class ProSimService(Service):
     def __init__(self, index):
         Service.__init__(self, index, self.PROSIM_SVC_UUID, True)
         self.add_characteristic(ControlCharacteristic(self))
+        self.prosim8 = Prosim8(COMPORT)
 
     def handle_command(self, command):
-        print(f'Handling command {command}')
+        print(f'Sending command "{command}"')
+        self.prosim8.sendCommand(command)
 
 class ControlCharacteristic(Characteristic):
     CTL_CHARACTERISTIC_UUID = "00000003-710e-4a5b-8d75-3e5b444bc3cf"
@@ -55,7 +57,7 @@ class ControlCharacteristic(Characteristic):
         self.add_descriptor(CtlDescriptor(self))
 
     def WriteValue(self, value, options):
-        self.service.handle_command(str(value))
+        self.service.handle_command(dbus.ByteArray(value).decode('ascii'))
 
     def ReadValue(self, options):
         return "Not implemented"
