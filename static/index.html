@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="jquery-ui.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>ProSim 8</title>
+</head>
+<body>
+    <div class="titlebar">
+        <div class="menuButton" onClick="connectBle()">Connect</div>
+        <div class="topButtonHolder">Buttons</div>
+        <div class="switchHolder">Live Mode
+            <input type="checkbox" class="switch" />
+            <div class="customcheck">
+            <div class="checkitem"></div>
+        </div>
+
+        </div>
+    </div>
+    <div class="container">
+       
+
+    <!------------------------------------------  Heart Rate  ---------------------------------------->
+
+        <div class="column">
+            <div class="columnHeader">Heart Rate
+                <div class="valueHolder">
+                    <div class="sliderValue" id="sliderHeartRateValue"></div>
+                    <div class="unit">bpm</div>
+                </div>
+                <div class="colorIndicator green"></div>
+            </div>
+            <div class="vertical-slider-container">
+                <div class="slider-values" id="sliderHeartRateAxis"></div>
+                <div class="vertical-slider-container" id='sliderHeartRate'></div>
+            </div>
+            <div class="divider"> </div>
+            <div class="buttonContainer">
+                <button class="icon-button">
+                    <svg class="icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="fff" d="M13.1769 0.666504C12.5044 0.666504 11.9372 1.16722 11.8538 1.83446L11.6336 3.59655C10.4399 3.86691 9.32218 4.33745 8.31759 4.97102L6.91505 3.88016C6.38426 3.46733 5.62913 3.51434 5.15365 3.98982L3.98982 5.15366C3.51434 5.62914 3.46732 6.38427 3.88016 6.91505L4.97102 8.31759C4.33745 9.32219 3.86691 10.4399 3.59655 11.6336L1.83446 11.8538C1.16722 11.9372 0.666504 12.5044 0.666504 13.1769V14.8228C0.666504 15.4952 1.16722 16.0624 1.83446 16.1458L3.59655 16.3661C3.86691 17.5598 4.33745 18.6775 4.97102 19.6821L3.88016 21.0846C3.46733 21.6154 3.51434 22.3705 3.98982 22.846L5.15366 24.0099C5.62914 24.4853 6.38427 24.5324 6.91505 24.1195L8.31759 23.0287C9.32219 23.6622 10.4399 24.1328 11.6336 24.4031L11.8538 26.1652C11.9372 26.8325 12.5044 27.3332 13.1769 27.3332H14.8228C15.4952 27.3332 16.0624 26.8325 16.1458 26.1652L16.3661 24.4031C17.5598 24.1328 18.6775 23.6622 19.6821 23.0287L21.0846 24.1195C21.6154 24.5323 22.3705 24.4853 22.846 24.0099L24.0099 22.846C24.4853 22.3705 24.5323 21.6154 24.1195 21.0846L23.0287 19.6821C23.6622 18.6775 24.1328 17.5598 24.4031 16.3661L26.1652 16.1458C26.8325 16.0624 27.3332 15.4952 27.3332 14.8228V13.1769C27.3332 12.5044 26.8325 11.9372 26.1652 11.8538L24.4031 11.6336C24.1328 10.4399 23.6622 9.32218 23.0287 8.31759L24.1195 6.91505C24.5323 6.38426 24.4853 5.62913 24.0099 5.15365L22.846 3.98982C22.3705 3.51434 21.6154 3.46732 21.0846 3.88016L19.6821 4.97102C18.6775 4.33745 17.5598 3.86691 16.3661 3.59655L16.1458 1.83446C16.0624 1.16722 15.4952 0.666504 14.8228 0.666504H13.1769ZM13.9998 9.99984C16.209 9.99984 17.9998 11.7907 17.9998 13.9998C17.9998 16.209 16.209 17.9998 13.9998 17.9998C11.7907 17.9998 9.99984 16.209 9.99984 13.9998C9.99984 11.7907 11.7907 9.99984 13.9998 9.99984Z" fill="#828795"/>
+                        </svg>
+                </button>
+            </div>
+        </div>
+
+            <!------------------------------------------  Respiratory Rate  ---------------------------------------->
+
+        <div class="column">
+            <div class="columnHeader">Respiratory Rate
+                <div class="valueHolder">
+                    <div class="sliderValue" id="sliderResipratoryRateValue"></div>
+                    <div class="unit">bpm</div>
+                </div>
+                <div class="colorIndicator blue"></div>
+            </div>
+            <div class="vertical-slider-container">
+                <div class="slider-values" id="sliderResipratoryRateAxis"></div>
+                <div class="vertical-slider-container" id='sliderResipratoryRate'></div>
+            </div>
+            <div class="divider"> </div>
+            <div class="buttonContainer">
+                <button class="icon-button">
+                    <svg class="icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="fff" d="M13.1769 0.666504C12.5044 0.666504 11.9372 1.16722 11.8538 1.83446L11.6336 3.59655C10.4399 3.86691 9.32218 4.33745 8.31759 4.97102L6.91505 3.88016C6.38426 3.46733 5.62913 3.51434 5.15365 3.98982L3.98982 5.15366C3.51434 5.62914 3.46732 6.38427 3.88016 6.91505L4.97102 8.31759C4.33745 9.32219 3.86691 10.4399 3.59655 11.6336L1.83446 11.8538C1.16722 11.9372 0.666504 12.5044 0.666504 13.1769V14.8228C0.666504 15.4952 1.16722 16.0624 1.83446 16.1458L3.59655 16.3661C3.86691 17.5598 4.33745 18.6775 4.97102 19.6821L3.88016 21.0846C3.46733 21.6154 3.51434 22.3705 3.98982 22.846L5.15366 24.0099C5.62914 24.4853 6.38427 24.5324 6.91505 24.1195L8.31759 23.0287C9.32219 23.6622 10.4399 24.1328 11.6336 24.4031L11.8538 26.1652C11.9372 26.8325 12.5044 27.3332 13.1769 27.3332H14.8228C15.4952 27.3332 16.0624 26.8325 16.1458 26.1652L16.3661 24.4031C17.5598 24.1328 18.6775 23.6622 19.6821 23.0287L21.0846 24.1195C21.6154 24.5323 22.3705 24.4853 22.846 24.0099L24.0099 22.846C24.4853 22.3705 24.5323 21.6154 24.1195 21.0846L23.0287 19.6821C23.6622 18.6775 24.1328 17.5598 24.4031 16.3661L26.1652 16.1458C26.8325 16.0624 27.3332 15.4952 27.3332 14.8228V13.1769C27.3332 12.5044 26.8325 11.9372 26.1652 11.8538L24.4031 11.6336C24.1328 10.4399 23.6622 9.32218 23.0287 8.31759L24.1195 6.91505C24.5323 6.38426 24.4853 5.62913 24.0099 5.15365L22.846 3.98982C22.3705 3.51434 21.6154 3.46732 21.0846 3.88016L19.6821 4.97102C18.6775 4.33745 17.5598 3.86691 16.3661 3.59655L16.1458 1.83446C16.0624 1.16722 15.4952 0.666504 14.8228 0.666504H13.1769ZM13.9998 9.99984C16.209 9.99984 17.9998 11.7907 17.9998 13.9998C17.9998 16.209 16.209 17.9998 13.9998 17.9998C11.7907 17.9998 9.99984 16.209 9.99984 13.9998C9.99984 11.7907 11.7907 9.99984 13.9998 9.99984Z" fill="#828795"/>
+                        </svg>
+                </button>
+                <button class="icon-button">
+                    <svg class="icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.9077 28H15.3908C14.8707 28 14.445 27.6005 14.4493 27.0804C14.4512 26.8446 14.4562 26.6019 14.4608 26.3742C14.4659 26.1255 14.4706 25.8948 14.4706 25.7106C14.4706 24.0684 12.7227 24.366 11.3394 24.6015C10.9059 24.6753 10.5082 24.743 10.2114 24.743C9.79998 24.743 8.63185 24.2191 8.44484 23.1344C8.34542 22.5577 8.30969 22.0907 8.28117 21.7179C8.25604 21.3895 8.23651 21.1342 8.18396 20.9415C8.15935 20.8513 8.13407 20.7095 8.10385 20.54C8.02833 20.1165 7.92197 19.52 7.71817 19.1227C7.77799 19.0864 7.83941 19.0489 7.90242 19.0101C8.67825 18.5327 10.3218 17.3337 11.1907 17.3337C12.2568 17.3337 13.8598 17.676 15.1649 18.0104C16.47 18.3448 17.9673 18.8094 17.7572 20.34C17.6913 20.8204 17.6125 21.6355 17.5182 22.6107C17.3616 24.2318 17.1621 26.2956 16.9077 28Z"/>
+                        <path d="M19.2753 28C19.2753 26.0785 19.1843 20.54 19.1843 19.3535C19.3049 18.1781 18.8917 14.6951 15.9864 13.6944C13.6787 12.8995 11.2647 14.3969 9.94942 15.2126C9.73402 15.3462 9.5481 15.4615 9.39694 15.5455C8.73218 15.9148 7.85225 16.7597 7.0164 17.5623C6.85804 17.7144 6.70126 17.8649 6.54782 18.0104C6.21752 17.4068 6.68273 16.8539 6.94349 16.544C6.96942 16.5132 6.99332 16.4848 7.01422 16.4589C7.06362 16.3979 7.12716 16.3374 7.1985 16.2694C7.58337 15.9025 8.19518 15.3194 8.03743 13.2814C7.85044 10.8658 8.80213 4 16.9636 4C26.1636 4 27.2142 11.2762 26.6304 14.033C26.3603 15.3087 25.888 16.0901 25.441 16.8298C24.8447 17.8164 24.2933 18.7288 24.3262 20.6408C24.3622 22.7281 24.615 25.2222 24.8174 26.8536C24.8924 27.4588 24.4236 28 23.8138 28H19.2753Z" />
+                    </svg>
+                        
+                </button>
+            </div>
+        </div>
+
+
+    <!------------------------------------------  SpO2 ---------------------------------------------->
+
+    <div class="column">
+        <div class="columnHeader">SpO2
+            <div class="valueHolder">
+                <div class="sliderValue" id="sliderHeartSpO2Value"></div>
+                <div class="unit">bpm</div>
+            </div>
+            <div class="colorIndicator orange"></div>
+        </div>
+        <div class="vertical-slider-container">
+            <div class="slider-values" id="sliderHeartSpO2Axis"></div>
+            <div class="vertical-slider-container" id='sliderHeartSpO2'></div>
+        </div>
+        <div class="divider"> </div>
+        <div class="buttonContainer">
+            <button class="icon-button">
+                <svg class="icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="fff" d="M13.1769 0.666504C12.5044 0.666504 11.9372 1.16722 11.8538 1.83446L11.6336 3.59655C10.4399 3.86691 9.32218 4.33745 8.31759 4.97102L6.91505 3.88016C6.38426 3.46733 5.62913 3.51434 5.15365 3.98982L3.98982 5.15366C3.51434 5.62914 3.46732 6.38427 3.88016 6.91505L4.97102 8.31759C4.33745 9.32219 3.86691 10.4399 3.59655 11.6336L1.83446 11.8538C1.16722 11.9372 0.666504 12.5044 0.666504 13.1769V14.8228C0.666504 15.4952 1.16722 16.0624 1.83446 16.1458L3.59655 16.3661C3.86691 17.5598 4.33745 18.6775 4.97102 19.6821L3.88016 21.0846C3.46733 21.6154 3.51434 22.3705 3.98982 22.846L5.15366 24.0099C5.62914 24.4853 6.38427 24.5324 6.91505 24.1195L8.31759 23.0287C9.32219 23.6622 10.4399 24.1328 11.6336 24.4031L11.8538 26.1652C11.9372 26.8325 12.5044 27.3332 13.1769 27.3332H14.8228C15.4952 27.3332 16.0624 26.8325 16.1458 26.1652L16.3661 24.4031C17.5598 24.1328 18.6775 23.6622 19.6821 23.0287L21.0846 24.1195C21.6154 24.5323 22.3705 24.4853 22.846 24.0099L24.0099 22.846C24.4853 22.3705 24.5323 21.6154 24.1195 21.0846L23.0287 19.6821C23.6622 18.6775 24.1328 17.5598 24.4031 16.3661L26.1652 16.1458C26.8325 16.0624 27.3332 15.4952 27.3332 14.8228V13.1769C27.3332 12.5044 26.8325 11.9372 26.1652 11.8538L24.4031 11.6336C24.1328 10.4399 23.6622 9.32218 23.0287 8.31759L24.1195 6.91505C24.5323 6.38426 24.4853 5.62913 24.0099 5.15365L22.846 3.98982C22.3705 3.51434 21.6154 3.46732 21.0846 3.88016L19.6821 4.97102C18.6775 4.33745 17.5598 3.86691 16.3661 3.59655L16.1458 1.83446C16.0624 1.16722 15.4952 0.666504 14.8228 0.666504H13.1769ZM13.9998 9.99984C16.209 9.99984 17.9998 11.7907 17.9998 13.9998C17.9998 16.209 16.209 17.9998 13.9998 17.9998C11.7907 17.9998 9.99984 16.209 9.99984 13.9998C9.99984 11.7907 11.7907 9.99984 13.9998 9.99984Z" fill="#828795"/>
+                    </svg>
+            </button>
+        </div>
+    </div>
+
+        <!------------------------------------------  Blood Pressure ---------------------------------------------->
+
+        <div class="column double">
+            <div class="doubleContainer">
+                <div class="columnHeader">Blood Pressure
+                    <div class="valueHolder">
+                        <div class="sliderValue" id="sliderBloodPressure1Value"></div>
+                        <div class="unit">mmhg</div>
+                    </div>
+                    <div class="colorIndicator red"></div>
+                </div>
+                <div class="columnHeader">Blood Pressure
+                    <div class="valueHolder horiz">
+                        <div class="sliderValue" id="sliderBloodPressure2Value"></div>
+                        <div class="unit">mmhg</div>
+                    </div>
+                    <div class="colorIndicator red"></div>
+                </div>
+            </div>
+            <div class="doubleSlider">
+                <div class="vertical-slider-container">
+                    <div class="slider-values" id="sliderBloodPressure1Axis"></div>
+                    <div class="vertical-slider-container" id='sliderBloodPressure1'></div>
+                </div>
+                <div class="vertical-slider-container">
+                    <div class="slider-values" id="sliderBloodPressure2Axis"></div>
+                    <div class="vertical-slider-container" id='sliderBloodPressure2'></div>
+                </div>
+            </div>
+            <div class="divider"> </div>
+            <div class="buttonContainer">
+                <button class="icon-button">
+                    <svg class="icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="fff" d="M13.1769 0.666504C12.5044 0.666504 11.9372 1.16722 11.8538 1.83446L11.6336 3.59655C10.4399 3.86691 9.32218 4.33745 8.31759 4.97102L6.91505 3.88016C6.38426 3.46733 5.62913 3.51434 5.15365 3.98982L3.98982 5.15366C3.51434 5.62914 3.46732 6.38427 3.88016 6.91505L4.97102 8.31759C4.33745 9.32219 3.86691 10.4399 3.59655 11.6336L1.83446 11.8538C1.16722 11.9372 0.666504 12.5044 0.666504 13.1769V14.8228C0.666504 15.4952 1.16722 16.0624 1.83446 16.1458L3.59655 16.3661C3.86691 17.5598 4.33745 18.6775 4.97102 19.6821L3.88016 21.0846C3.46733 21.6154 3.51434 22.3705 3.98982 22.846L5.15366 24.0099C5.62914 24.4853 6.38427 24.5324 6.91505 24.1195L8.31759 23.0287C9.32219 23.6622 10.4399 24.1328 11.6336 24.4031L11.8538 26.1652C11.9372 26.8325 12.5044 27.3332 13.1769 27.3332H14.8228C15.4952 27.3332 16.0624 26.8325 16.1458 26.1652L16.3661 24.4031C17.5598 24.1328 18.6775 23.6622 19.6821 23.0287L21.0846 24.1195C21.6154 24.5323 22.3705 24.4853 22.846 24.0099L24.0099 22.846C24.4853 22.3705 24.5323 21.6154 24.1195 21.0846L23.0287 19.6821C23.6622 18.6775 24.1328 17.5598 24.4031 16.3661L26.1652 16.1458C26.8325 16.0624 27.3332 15.4952 27.3332 14.8228V13.1769C27.3332 12.5044 26.8325 11.9372 26.1652 11.8538L24.4031 11.6336C24.1328 10.4399 23.6622 9.32218 23.0287 8.31759L24.1195 6.91505C24.5323 6.38426 24.4853 5.62913 24.0099 5.15365L22.846 3.98982C22.3705 3.51434 21.6154 3.46732 21.0846 3.88016L19.6821 4.97102C18.6775 4.33745 17.5598 3.86691 16.3661 3.59655L16.1458 1.83446C16.0624 1.16722 15.4952 0.666504 14.8228 0.666504H13.1769ZM13.9998 9.99984C16.209 9.99984 17.9998 11.7907 17.9998 13.9998C17.9998 16.209 16.209 17.9998 13.9998 17.9998C11.7907 17.9998 9.99984 16.209 9.99984 13.9998C9.99984 11.7907 11.7907 9.99984 13.9998 9.99984Z" fill="#828795"/>
+                        </svg>
+                </button>
+                <button class="icon-button">
+                    <svg class="icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.9077 28H15.3908C14.8707 28 14.445 27.6005 14.4493 27.0804C14.4512 26.8446 14.4562 26.6019 14.4608 26.3742C14.4659 26.1255 14.4706 25.8948 14.4706 25.7106C14.4706 24.0684 12.7227 24.366 11.3394 24.6015C10.9059 24.6753 10.5082 24.743 10.2114 24.743C9.79998 24.743 8.63185 24.2191 8.44484 23.1344C8.34542 22.5577 8.30969 22.0907 8.28117 21.7179C8.25604 21.3895 8.23651 21.1342 8.18396 20.9415C8.15935 20.8513 8.13407 20.7095 8.10385 20.54C8.02833 20.1165 7.92197 19.52 7.71817 19.1227C7.77799 19.0864 7.83941 19.0489 7.90242 19.0101C8.67825 18.5327 10.3218 17.3337 11.1907 17.3337C12.2568 17.3337 13.8598 17.676 15.1649 18.0104C16.47 18.3448 17.9673 18.8094 17.7572 20.34C17.6913 20.8204 17.6125 21.6355 17.5182 22.6107C17.3616 24.2318 17.1621 26.2956 16.9077 28Z"/>
+                        <path d="M19.2753 28C19.2753 26.0785 19.1843 20.54 19.1843 19.3535C19.3049 18.1781 18.8917 14.6951 15.9864 13.6944C13.6787 12.8995 11.2647 14.3969 9.94942 15.2126C9.73402 15.3462 9.5481 15.4615 9.39694 15.5455C8.73218 15.9148 7.85225 16.7597 7.0164 17.5623C6.85804 17.7144 6.70126 17.8649 6.54782 18.0104C6.21752 17.4068 6.68273 16.8539 6.94349 16.544C6.96942 16.5132 6.99332 16.4848 7.01422 16.4589C7.06362 16.3979 7.12716 16.3374 7.1985 16.2694C7.58337 15.9025 8.19518 15.3194 8.03743 13.2814C7.85044 10.8658 8.80213 4 16.9636 4C26.1636 4 27.2142 11.2762 26.6304 14.033C26.3603 15.3087 25.888 16.0901 25.441 16.8298C24.8447 17.8164 24.2933 18.7288 24.3262 20.6408C24.3622 22.7281 24.615 25.2222 24.8174 26.8536C24.8924 27.4588 24.4236 28 23.8138 28H19.2753Z" />
+                    </svg>
+                        
+                </button>
+                <button class="icon-button">
+                    <svg class="icon" width="32" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.08147 4.55845C6.50948 3.95924 7.34221 3.82045 7.94143 4.24846L16.4998 10.3616L25.0581 4.24846C25.6573 3.82045 26.4901 3.95924 26.9181 4.55845C27.3461 5.15767 27.2073 5.9904 26.6081 6.41841L16.4998 13.6386L6.39146 6.41841C5.79224 5.9904 5.65345 5.15767 6.08147 4.55845Z"/>
+                        <path d="M27.1664 16.0001C27.1664 16.7365 26.5695 17.3334 25.8331 17.3334H7.16644C6.43006 17.3334 5.83311 16.7365 5.83311 16.0001C5.83311 15.2637 6.43006 14.6668 7.16644 14.6668H25.8331C26.5695 14.6668 27.1664 15.2637 27.1664 16.0001Z"/>
+                        <path d="M25.0581 27.7517C25.6573 28.1798 26.4901 28.041 26.9181 27.4418C27.3461 26.8425 27.2073 26.0098 26.6081 25.5818L16.4998 18.3616L6.39146 25.5818C5.79224 26.0098 5.65345 26.8425 6.08147 27.4418C6.50948 28.041 7.34221 28.1798 7.94143 27.7517L16.4998 21.6386L25.0581 27.7517Z"/>
+                    </svg>
+                        
+                </button>
+            </div>
+        </div>
+
+ <!------------------------------------------  Temp ---------------------------------------------->
+
+        <div class="column">
+            <div class="columnHeader">Temperature
+                <div class="valueHolder">
+                    <div class="sliderValue" id="sliderTempValue"></div>
+                    <div class="unit">C</div>
+                </div>
+                <div class="colorIndicator purple"></div>
+            </div>
+            <div class="vertical-slider-container">
+                <div class="slider-values" id="sliderTempAxis"></div>
+                <div class="vertical-slider-container" id='sliderTemp'></div>
+            </div>
+            <div class="divider"> </div>
+            <div class="buttonContainer">
+                <button class="icon-button" display="none">
+                    <svg class="icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="fff" d="M13.1769 0.666504C12.5044 0.666504 11.9372 1.16722 11.8538 1.83446L11.6336 3.59655C10.4399 3.86691 9.32218 4.33745 8.31759 4.97102L6.91505 3.88016C6.38426 3.46733 5.62913 3.51434 5.15365 3.98982L3.98982 5.15366C3.51434 5.62914 3.46732 6.38427 3.88016 6.91505L4.97102 8.31759C4.33745 9.32219 3.86691 10.4399 3.59655 11.6336L1.83446 11.8538C1.16722 11.9372 0.666504 12.5044 0.666504 13.1769V14.8228C0.666504 15.4952 1.16722 16.0624 1.83446 16.1458L3.59655 16.3661C3.86691 17.5598 4.33745 18.6775 4.97102 19.6821L3.88016 21.0846C3.46733 21.6154 3.51434 22.3705 3.98982 22.846L5.15366 24.0099C5.62914 24.4853 6.38427 24.5324 6.91505 24.1195L8.31759 23.0287C9.32219 23.6622 10.4399 24.1328 11.6336 24.4031L11.8538 26.1652C11.9372 26.8325 12.5044 27.3332 13.1769 27.3332H14.8228C15.4952 27.3332 16.0624 26.8325 16.1458 26.1652L16.3661 24.4031C17.5598 24.1328 18.6775 23.6622 19.6821 23.0287L21.0846 24.1195C21.6154 24.5323 22.3705 24.4853 22.846 24.0099L24.0099 22.846C24.4853 22.3705 24.5323 21.6154 24.1195 21.0846L23.0287 19.6821C23.6622 18.6775 24.1328 17.5598 24.4031 16.3661L26.1652 16.1458C26.8325 16.0624 27.3332 15.4952 27.3332 14.8228V13.1769C27.3332 12.5044 26.8325 11.9372 26.1652 11.8538L24.4031 11.6336C24.1328 10.4399 23.6622 9.32218 23.0287 8.31759L24.1195 6.91505C24.5323 6.38426 24.4853 5.62913 24.0099 5.15365L22.846 3.98982C22.3705 3.51434 21.6154 3.46732 21.0846 3.88016L19.6821 4.97102C18.6775 4.33745 17.5598 3.86691 16.3661 3.59655L16.1458 1.83446C16.0624 1.16722 15.4952 0.666504 14.8228 0.666504H13.1769ZM13.9998 9.99984C16.209 9.99984 17.9998 11.7907 17.9998 13.9998C17.9998 16.209 16.209 17.9998 13.9998 17.9998C11.7907 17.9998 9.99984 16.209 9.99984 13.9998C9.99984 11.7907 11.7907 9.99984 13.9998 9.99984Z" fill="#828795"/>
+                        </svg>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal1">
+        <div class="modal-content">
+            <div class="close" onclick="closeModal()"></div>
+            <div class="modalHeader">Header</div>
+            <div class="option-buttons">
+                <button class="button box selected" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 1</div>
+                </button>
+                <button class="button box" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 2</div>
+                </button>
+                <button class="button box" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 3</div>
+                </button>
+                <button class="button box" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 4</div>
+                </button>
+                <button class="button box" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 5</div>
+                </button>
+                <button class="button box" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 6</div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="myModal2">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="option-buttons">
+                <button onclick="updateButtonContent('Content 1')">Option 1</button>
+                <button onclick="updateButtonContent('Content 2')">Option 2</button>
+                <button onclick="updateButtonContent('Content 3')">Option 3</button>
+                <button onclick="updateButtonContent('Content 4')">Option 4</button>
+                <button onclick="updateButtonContent('Content 5')">Option 5</button>
+                <button onclick="updateButtonContent('Content 6')">Option 6</button>
+                <button onclick="updateButtonContent('Content 7')">Option 7</button>
+                <button onclick="updateButtonContent('Content 8')">Option 8</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal3">
+        <div class="modal-content">
+            <div class="close" onclick="closeModal()"></div>
+            <div class="modalHeader">Header</div>
+            <div class="option-buttons">
+                <button class="button box selected" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 1</div>
+                </button>
+                <button class="button box" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 2</div>
+                </button>
+                <button class="button box" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 3</div>
+                </button>
+                <button class="button box" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 4</div>
+                </button>
+                <button class="button box" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 5</div>
+                </button>
+                <button class="button box" onclick="updateButtonContent('Content 1'); selectOption(this)">
+                    <div class="iconHolder box"></div>
+                    <div class="buttonContent box">Option 6</div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal4">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="option-buttons">
+                <button onclick="updateButtonContent('Content 1')">Option 1</button>
+                <button onclick="updateButtonContent('Content 2')">Option 2</button>
+                <button onclick="updateButtonContent('Content 3')">Option 3</button>
+                <button onclick="updateButtonContent('Content 4')">Option 4</button>
+                <button onclick="updateButtonContent('Content 5')">Option 5</button>
+                <button onclick="updateButtonContent('Content 6')">Option 6</button>
+                <button onclick="updateButtonContent('Content 7')">Option 7</button>
+                <button onclick="updateButtonContent('Content 8')">Option 8</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="jquery-3.7.1.min.js" type="text/javascript"></script>
+    <script src="jquery-ui.min.js" type="text/javascript"></script>
+    <script src="prosim8.js" type="text/javascript"></script>
+</body>
+</html>

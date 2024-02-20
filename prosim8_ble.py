@@ -49,6 +49,7 @@ class ProSimService(Service):
             print(f'Error opening port "{SERIAL_PATH}"')
 
     def send_command(self, command):
+        print(f'Received command "{command}"')
         if self.ser is not None:
             try:
                 print(f'Sending command "{command}"')
@@ -58,6 +59,7 @@ class ProSimService(Service):
                 return response
             except:
                 print("Serial port error")
+                return ""
 
 class ControlCharacteristic(Characteristic):
     CTL_CHARACTERISTIC_UUID = "00000003-710e-4a5b-8d75-3e5b444bc3cf"
