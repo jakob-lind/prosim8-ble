@@ -13,6 +13,8 @@
     --fhs-gray-gray-900: #2F323A;
     --fhs-gray-gray-1000: #14161A;
     --success-800: #257D69;
+    --fhs-primary-blue-800: #2C7F96;
+    --fhs-primary-blue-900: #2B6679;
 }
 
 html, body {
@@ -31,7 +33,7 @@ body {
     background-color: var(--main-bg-color);
 }
 
-.titlebar{
+.titlebar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,7 +46,7 @@ body {
 
   /* ----------------------------- Switch - Style ------------------------ */
 
-.switchHolder{
+.switchHolder {
     display: flex;
     gap: 8px;
     align-items: center;
@@ -56,11 +58,11 @@ body {
     line-height: normal;
 }
 
-.switchHolderActive{
+.switchHolderActive {
     color: var(--fhs-gray-gray-200);
 }
 
-.switch{
+.switch {
     display:none;
 }
 
@@ -72,7 +74,7 @@ body {
     background: var(--fhs-gray-gray-800);
   }
 
-  .customcheckActive{
+  .customcheckActive {
     background: var(--success-800);
   }
 
@@ -87,12 +89,10 @@ body {
   }
   
   /* styles when active */
-  .itemactive{
+  .itemactive {
     margin-left: 36px;
     background: var(--fhs-gray-gray-400);
 }
-    
-
 
 .container {
     display: flex;
@@ -119,7 +119,7 @@ body {
     margin-bottom:12px;
 }
 
-.column.double{
+.column.double {
     width: calc(2*16.66% - 8px); /* Adjusted width for six columns */
 }
 
@@ -142,7 +142,7 @@ body {
     
 }
 
-.doubleContainer{
+.doubleContainer {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
@@ -155,7 +155,7 @@ body {
     gap: 0.5rem;
 }
 
-.horiz{
+.horiz {
     flex-direction: row;
 }
 
@@ -168,6 +168,7 @@ body {
     font-weight: 500;
     line-height: normal;
 }
+
 .unit {
     color: var(--fhs-gray-gray-600, #828795);
     text-align: left;
@@ -176,6 +177,12 @@ body {
     font-style: normal;
     font-weight: 500;
     line-height: 2.2rem; /* 200% */
+}
+
+.settingHeader {
+    font-size: 0.75rem;
+    color: var(--fhs-gray-gray-600);
+    height: 1rem;
 }
 
 .colorIndicator {
@@ -207,7 +214,7 @@ body {
 
 /* Slider Styling */
 
-.doubleSlider{
+.doubleSlider {
     display: flex;
     gap: 1rem;
     width: 100%;
@@ -224,7 +231,7 @@ body {
     width: 100%;
 }
 
-.sliderValue{
+.sliderValue {
     color: var(--fhs-gray-white, #FFF);
     text-align: left;
     font-family: Hanken Grotesk;
@@ -234,7 +241,7 @@ body {
     line-height: normal;
 }
 
-.sliderValue.dragging{
+.sliderValue.dragging {
     color: var(--fhs-gray-gray-500);
 }
 
@@ -250,7 +257,7 @@ body {
 }
 
 /* -------------------- Button Styling ------------------------------   */
-.buttonContainer{
+.buttonContainer {
     display: flex;
     width: 100%;
     gap: 24px;
@@ -258,7 +265,7 @@ body {
     justify-content: center;
 }
 
-.divider{
+.divider {
     height: 2px;
     background-color: var(--fhs-gray-gray-800);
     margin-top: 24px;
@@ -276,10 +283,10 @@ body {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-  }
+}
 
   /* Define the styles for the SVG icon */
-  .icon {
+.icon {
     fill: var(--fhs-gray-gray-600);
     transition: fill 0.3s ease, color 0.3s ease;
     width: 32px;
@@ -294,30 +301,6 @@ body {
     fill: var(--fhs-gray-gray-800);
   }
   
-
-.button {
-    display: inline block;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    width: 100%;
-    height: 48px;
-    margin-top: 8px;
-}
-
-/* Default state */
-.button.default {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: stretch;
-    background: var(--fhs-gray-gray-800);
-    justify-content: left;
-    align-items: flex-start; 
-    padding: 8px;
-    font-family: hanken grotesk;
-}
 
 /* Active/Down state */
 .button:active {
@@ -349,14 +332,14 @@ body {
     margin-right: 8px;
 }
 
-.buttonContentContainer{
+.buttonContentContainer {
     display: flex;
     flex-direction: column;
     justify-content: left;
     align-items: flex-start;
 }
 
-.buttonLabel{
+.buttonLabel {
     font-size: 0.6875rem;
     color: var(--fhs-gray-gray-400);
 }
@@ -398,7 +381,7 @@ body {
     height: 20px;
     background: #4CAF50;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 0 50% 50% 0;
   }
   
   .custom-slider::-moz-range-thumb {
@@ -406,7 +389,7 @@ body {
     height: 20px;
     background: #4CAF50;
     cursor: pointer;
-    border-radius: 50%;
+    border-radius: 0 50% 50% 0;
   }
   
   #slider-value {
@@ -460,7 +443,7 @@ body {
 display: flex;
 }
 
-.modalHeader{
+.modalHeader {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -476,75 +459,55 @@ display: flex;
     margin-top: 8px;
 }
 
-.option-buttons{
+.option-buttons {
     display: flex;
     flex-direction: column;
 }
 
 
-/* -------------------- Modal Button Styling ------------------------------  */
+/* -------------------- Button Styling ------------------------------  */
 
-.button.box {
-    display: inline block;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    width: 100%;
-    height: 48px;
-    margin-top: 8px;
-}
-
-/* Default state */
-.button.box {
-    display: inline-block;
+.buttonGroup {
     display: flex;
-    justify-content: center;
+    gap: 0.5rem;
+}
+
+.button {
+    display: flex;
     align-items: center;
-    align-self: stretch;
-    background: var(--fhs-gray-gray-700);
-    justify-content: left;
-    align-items: flex-start; 
-    padding: 8px;
-    font-family: hanken grotesk;
-    height: 64px;
-    margin-bottom: 0px;
-}
-
-/* Active/Down state */
-.button.box:active {
-    background: var(--fhs-gray-gray-600);
-}
-
-/* Inactive state */
-.button.box:disabled {
-    background-color: #ddd;
-    color: #777;
-    cursor: not-allowed;
-}
-
-
-.button.box.selected {
-    background-color: #3498db; /* Change this to the desired selected state color */
-    color: #fff; /* Change this to the desired text color for the selected state */
-}
-
-.iconHolder.box {
-    background-color: #4CAF50;
-    color: #fff;
-    border-color: #45a049;
-    width: 48px;
-    height: 48px;
-    background-color: var(--fhs-gray-gray-400);
-    float: left;
-    margin-right: 16px;
-}
-
-.buttonContent.box{
-    margin-top: 12px;
-    font-size: 1.2rem;
-    height: 32px;
-    justify-content: center;
-    font-style: normal;
-    font-weight: 4r00;
+    border-radius: 0.5rem;
     color: var(--fhs-gray-gray-200);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 1rem;
+    height: 3rem;
+    background: var(--fhs-gray-gray-800);
+    cursor: pointer;
+}
+
+.button:active {
+    background: var(--fhs-gray-gray-1000);
+}
+
+.button.highlighted {
+    background: var(--fhs-primary-blue-800);
+}
+
+.button.highlighted:active {
+    background: var(--fhs-primary-blue-900);
+}
+
+.button img {
+    margin-right: 0.5rem;
+}
+
+/* -------------------- Dialog Styling ------------------------------  */
+.dialog {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    visibility: hidden;
+    position: absolute;
+    background: var(--fhs-gray-gray-1000);
+    opacity: 0.8;
 }
