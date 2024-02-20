@@ -41,16 +41,22 @@ class ProSimService(Service):
     def __init__(self, index):
         Service.__init__(self, index, self.PROSIM_SVC_UUID, True)
         self.add_characteristic(ControlCharacteristic(self))
-        self.ser = serial.Serial(SERIAL_PATH, 115200, timeout=1, xonxoff=True)
-        self.send_command('REMOTE')
+        try:
+            self.ser = serial.Serial(SERIAL_PATH, 115200, timeout=1, xonxoff=True)
+            self.send_command('REMOTE')
+        except:
+            print(f'Error opening port "{SERIAL_PATH}')
 
     def send_command(self, command):
         if self.ser is not None:
-            print(f'Sending command "{command}"')
-            self.ser.write(f'{command}\r\n'.encode('ascii'))
-            response = self.ser.readline()
-            print(f'Received response "{response}"')
-            return response
+            try:
+                print(f'Sending command "{command}"')
+                self.ser.write(f'{command}\r\n'.encode('ascii'))
+                response = self.ser.readline()
+                print(f'Received response "{response}"')
+                return response
+            except:
+                print("Serial port error")
 
 class ControlCharacteristic(Characteristic):
     CTL_CHARACTERISTIC_UUID = "00000003-710e-4a5b-8d75-3e5b444bc3cf"
