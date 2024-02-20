@@ -77,10 +77,10 @@ class Application(dbus.service.Object):
         return response
 
     def register_app_callback(self):
-        print("GATT application registered")
+        pass
 
     def register_app_error_callback(self, error):
-        print("Failed to register application: " + str(error))
+        pass
 
     def register(self):
         adapter = BleTools.find_adapter(self.bus)
@@ -97,7 +97,6 @@ class Application(dbus.service.Object):
         self.mainloop.run()
 
     def quit(self):
-        print("\nGATT application terminated")
         self.mainloop.quit()
 
 class Service(dbus.service.Object):
