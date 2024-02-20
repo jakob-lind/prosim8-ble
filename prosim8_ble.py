@@ -46,7 +46,7 @@ class ProSimService(Service):
             self.send_command('REMOTE')
             print("ProSim 8 BLE service started")
         except:
-            print(f'Error opening port "{SERIAL_PATH}:')
+            print(f'Error opening port "{SERIAL_PATH}"')
 
     def send_command(self, command):
         if self.ser is not None:
