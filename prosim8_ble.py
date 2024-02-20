@@ -27,7 +27,7 @@ import serial
 from ble_gatt_server.advertisement import Advertisement
 from ble_gatt_server.service import Application, Service, Characteristic, Descriptor
 
-SERIAL_PATH = "/dev/ttyACM0"
+SERIAL_PATH = "/dev/ttyUSB0"
 
 class ProSimAdvertisement(Advertisement):
     def __init__(self, index):

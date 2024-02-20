@@ -56,7 +56,10 @@ async function sendCommand(command) {
         return;
     }
     const encoder = new TextEncoder();
-    await bleCharacteristic.writeValue(encoder.encode(command));
+    try {
+        await bleCharacteristic.writeValue(encoder.encode(command));
+    }
+    catch { }
 }
 
 function addEventHandlerToSlider(name, eventFn) {
