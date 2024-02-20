@@ -44,6 +44,7 @@ class ProSimService(Service):
         try:
             self.ser = serial.Serial(SERIAL_PATH, 115200, timeout=1, xonxoff=True)
             self.send_command('REMOTE')
+            print("ProSim 8 BLE service started")
         except:
             print(f'Error opening port "{SERIAL_PATH}')
 
