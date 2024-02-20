@@ -60,12 +60,13 @@ class ControlCharacteristic(Characteristic):
                 self, self.CTL_CHARACTERISTIC_UUID,
                 ["read", "write"], service)
         self.add_descriptor(CtlDescriptor(self))
+        self.response = ""
 
     def WriteValue(self, value, options):
-        self.service.send_command(dbus.ByteArray(value).decode('ascii'))
+        self.response = self.service.send_command(dbus.ByteArray(value).decode('ascii'))
 
     def ReadValue(self, options):
-        return "Not implemented"
+        return self.response
 
 class CtlDescriptor(Descriptor):
     CTL_DESCRIPTOR_UUID = "2901"
