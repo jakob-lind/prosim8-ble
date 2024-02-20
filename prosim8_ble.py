@@ -41,18 +41,12 @@ class ProSimService(Service):
     def __init__(self, index):
         Service.__init__(self, index, self.PROSIM_SVC_UUID, True)
         self.add_characteristic(ControlCharacteristic(self))
-        try:
-            self.ser = serial.Serial(SERIAL_PATH, 115200, timeout=1, xonxoff=True)
-            self.send_command('REMOTE')
-            print("ProSim 8 BLE service started")
-        except:
-            print(f'Error opening port "{SERIAL_PATH}"')
+        self.check_serial()
 
     def send_command(self, command):
-        print(f'Received command "{command}"')
-        if self.ser is not None:
+        print(f'Received command "{command}", sending to ProSim 8')
+        if (self.check_serial()):
             try:
-                print(f'Sending command "{command}"')
                 self.ser.write(f'{command}\r\n'.encode('ascii'))
                 response = self.ser.readline()
                 print(f'Received response "{response}"')
@@ -60,6 +54,18 @@ class ProSimService(Service):
             except:
                 print("Serial port error")
                 return ""
+    
+    def check_serial(self):
+        if self.ser is None:
+            try:
+                self.ser = serial.Serial(SERIAL_PATH, 115200, timeout=1, xonxoff=True)
+                self.send_command('REMOTE')
+                print("ProSim 8 connected")
+                return True
+            except:
+                print(f'Error initializing port "{SERIAL_PATH}"')
+                return False
+
 
 class ControlCharacteristic(Characteristic):
     CTL_CHARACTERISTIC_UUID = "00000003-710e-4a5b-8d75-3e5b444bc3cf"
