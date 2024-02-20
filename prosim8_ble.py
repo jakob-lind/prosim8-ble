@@ -41,6 +41,7 @@ class ProSimService(Service):
     def __init__(self, index):
         Service.__init__(self, index, self.PROSIM_SVC_UUID, True)
         self.add_characteristic(ControlCharacteristic(self))
+        self.ser = None
         self.check_serial()
 
     def send_command(self, command):
