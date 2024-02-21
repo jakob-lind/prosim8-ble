@@ -86,7 +86,7 @@ async function activateState() {
             await stateHandlers[sliderKey](targetState[sliderKey]);
         }
     }
-    sourceState = { ...targetState };
+    sourceState = { ...sourceState, ...targetState };
     targetState = { };
 
     $('#activateButton').css('display', 'none');
@@ -151,6 +151,7 @@ async function trendState(time) {
             for (sliderKey in sourceState) {
                 $(`#${sliderKey}`).slider('enable');
             }
+            activateState();
             $('#trendTimer').css('display', 'none');
             clearInterval(trendTimer);
             trendActive = false;
