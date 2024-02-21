@@ -1,7 +1,6 @@
 const serviceUuid = "00000001-710e-4a5b-8d75-3e5b444bc3cf";
 const characteristicUuid = "00000003-710e-4a5b-8d75-3e5b444bc3cf";
 const trendInterval = 1000;
-const trendDuration = 30000;
 
 let bleCharacteristic;
 let trendTimer;
@@ -105,8 +104,8 @@ function closeDialog(id) {
     $(`#${id}`).css('visibility', 'hidden');
 }
 
-async function trendState() {
-    //openDialog('trendDialog');
+async function trendState(time) {
+    trendDuration = time;
     const startTime = new Date().getTime();
 
     trendActive = true;
@@ -224,4 +223,6 @@ $(function() {
 
     targetState = sourceState;
     activateState();
+
+    openDialog('trendDialog');
 });

@@ -506,8 +506,51 @@ display: flex;
     width: 100%;
     height: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     visibility: hidden;
     position: absolute;
     background: var(--fhs-gray-gray-1000);
-    opacity: 0.8;
+    z-index: 100;
+    color: var(--fhs-white);
+}
+
+.dialogFrame {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    background: var(--fhs-gray-gray-900);
+    padding: 1rem
+}
+
+.dialogTitle {
+    font-size: 1.25rem;
+}
+
+.dialogSubTitle {
+    font-size: 0.875rem;
+    margin-top: 2.56rem;
+}
+
+.dialogChoiceGroup {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 35.9rem;
+    gap: 0.5rem;
+}
+
+.dialogButtonGroup {
+    align-self: flex-end;
+    margin-top: 1.5rem;
+}
+
+.dialogChoice {
+    display: flex;
+    align-items: center;
+    width: 15.7rem;
+    height: 3rem;
+    background: var(--fhs-gray-gray-800);
+    border-radius: 0.5rem;
+    padding-left: 1rem;
 }

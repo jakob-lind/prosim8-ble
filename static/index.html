@@ -22,7 +22,7 @@
             <div id="activateButton" class="button highlighted" style="display: none" onclick="activateState()">
                 <img src="iconActivate.svg" />Activate
             </div>
-            <div id="trendButton" class="button" style="display: none" onclick="trendState()">
+            <div id="trendButton" class="button" style="display: none" onclick="openDialog('trendDialog')">
                 <img src="iconTrend.svg" />Trend
             </div>
             <div id="trendTimer" style="display: none">
@@ -171,6 +171,48 @@
     </div>
 
     <div class="dialog" id="trendDialog">
+        <div class="dialogFrame">
+            <div class="dialogTitle">Trend - Set time</div>
+            <table>
+                <tr>
+                    <th><label for="trendTimeHours">Hours</label></th>
+                    <th><label for="trendTimeMinutes">Minutes</label></th>
+                    <th><label for="trendTimeSeconds">Seconds</label></th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="trendTimeHours" style="width: 3rem; font-size: 2rem"/>
+                    </td><td>
+                        <input type="text" id="trendTimeMinutes" style="width: 3rem; font-size: 2rem" />
+                    </td><td>
+                        <input type="text" id="trendTimeSeconds" style="width: 3rem; font-size: 2rem" />
+                    </td>
+                </tr>
+            </table>
+            <div class="buttonGroup dialogButtonGroup">
+                <div class="button highlighted" onclick="closeDialog('trendDialog')">OK</div>
+                <div class="button" onclick="closeDialog('trendDialog')">Cancel</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dialog" id="ecgDialog">
+        <div class="dialogFrame">
+            <div class="dialogTitle">ECG Settings</div>
+            <div class="dialogSubTitle">Heart Rythm</div>
+            <div class="dialogChoiceGroup">
+                <div class="dialogChoice">NSR Adult</div>
+                <div class="dialogChoice">NSR Pediatric</div>
+                <div class="dialogChoice">Atrial Flutter</div>
+                <div class="dialogChoice">Atrial Fibrillation</div>
+                <div class="dialogChoice">Sinus Arrhythmia</div>
+                <div class="dialogChoice">Supraventricular Tachycardia</div>
+            </div>
+            <div class="buttonGroup dialogButtonGroup">
+                <div class="button highlighted">OK</div>
+                <div class="button">Cancel</div>
+            </div>
+        </div>
     </div>
 
     <script src="jquery-3.7.1.min.js" type="text/javascript"></script>
