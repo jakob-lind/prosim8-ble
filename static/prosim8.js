@@ -1,19 +1,36 @@
-const serviceUuid = "00000001-710e-4a5b-8d75-3e5b444bc3cf";
-const characteristicUuid = "00000003-710e-4a5b-8d75-3e5b444bc3cf";
+const serviceUuid = '00000001-710e-4a5b-8d75-3e5b444bc3cf';
+const characteristicUuid = '00000003-710e-4a5b-8d75-3e5b444bc3cf';
 const trendInterval = 1000;
+
+const ecgIds = [ 'ecgNsra', 'ecgNsrp', 'ecgAfl', 'ecgAfib', 'ecgSna', 'ecgSvt' ];
+const ecgModes = [ 'nsra', 'nsrp', 'afl', 'afib', 'sna', 'svt' ];
 
 let bleCharacteristic;
 let trendTimer;
 let trendActive;
 let sourceState = { };
 let targetState = { };
+let ecgMode = 'nsra';
 
 const zeroPad = (num, decimals, places) => String(num.toFixed(decimals)).padStart(places, '0')
 
 const stateHandlers = {
     sliderHeartRate: async (value) => {
-        // Normal sinus rythm pediatric. bpm, 3 digits 010 to 360
-        await sendCommand(`NSRP=${zeroPad(value, 0, 3)}`);
+        switch (ecgMode) {
+            case 'nsra':
+            case 'nsrp':
+                // Normal adult or pediatric sinus rythm. bpm, 3 digits 010 to 360
+                await sendCommand(`${ecgMode.toUpperCase()}=${zeroPad(value, 0, 3)}`);
+                break;
+            case 'afl':
+            case 'sna':
+            case 'svt':
+                await sendCommand(`SPVWAVE=${ecgMode.toUpperCase()}`);
+                break;
+            case 'afi':
+                await sendCommand('AFIB=COARSE');
+                break;
+        }
     },
     sliderRespiratoryRate: async (value) => {
         // Set respiration rate. bpm, 3 digits 010 to 150
@@ -59,6 +76,7 @@ async function connectBle() {
     console.log(`Connected to ${device.name}`);
 
     targetState = sourceState;
+    refreshEcgMode();
     activateState();
 }
 
@@ -121,7 +139,6 @@ async function trendState(time) {
 
     if (trendTimer) {
         clearInterval(trendTimer);
-        trendActive = false;
     }
 
     trendTimer = setInterval(() => {
@@ -130,6 +147,8 @@ async function trendState(time) {
         if (relTime >= 1) {
             for (sliderKey in targetState) {
                 $(`#${sliderKey}`).slider('value', targetState[sliderKey]);
+            }
+            for (sliderKey in sourceState) {
                 $(`#${sliderKey}`).slider('enable');
             }
             $('#trendTimer').css('display', 'none');
@@ -155,13 +174,19 @@ function updateTargetState() {
 
 function openDialog(id) {
     $(`#${id}`).css('visibility', 'visible');
+
+    if (id === 'ecgDialog') {
+        selectEcgMode();
+    }
 }
 
 function closeDialog(id, ok = false) {
     $(`#${id}`).css('visibility', 'hidden');
+
     if (!ok) {
         return;
     }
+
     switch (id) {
         case 'trendDialog': {
             const hours = parseInt($('#trendTimeHours').val());
@@ -171,9 +196,39 @@ function closeDialog(id, ok = false) {
             trendState(totalSeconds * 1000);
             break;
         }
+        case 'ecgDialog': {
+            const selectedModeIdx = ecgIds.map((id) => $(`#${id}`)).map((elem) => elem.hasClass('selected')).indexOf(true);
+            ecgMode = ecgModes[selectedModeIdx];
+            refreshEcgMode();
+            break;
+        }
     }
 }
 
+function refreshEcgMode() {
+    const slider = $('#sliderHeartRate');
+    const sliderValue = $('#sliderHeartRateValue');
+    if (ecgMode === 'nsra' || ecgMode === 'nsrp') {
+        if (bleCharacteristic) {
+            slider.slider('enable');
+        }
+        sliderValue.removeClass('disabled');
+    } else {
+        slider.slider('disable');
+        sliderValue.addClass('disabled');
+    }
+    $('#heartRateHeader').html($(`#${ecgIds[ecgModes.indexOf(ecgMode)]}`).html());
+    stateHandlers.sliderHeartRate(slider.slider('value'));
+}
+
+function selectEcgMode(mode = ecgMode) {
+    for (const elem of ecgIds.map((id) => $(`#${id}`))) {
+        if (elem.hasClass('selected')) {
+            elem.removeClass('selected');
+        }
+    }
+    $(`#${ecgIds[ecgModes.indexOf(mode)]}`).addClass('selected');
+}
 
 function setupSlider(name, minValue, maxValue, diffAxis, startValue, step = 1) {
     sourceState[name] = startValue;
@@ -217,6 +272,7 @@ async function sendCommand(command) {
     }
     const encoder = new TextEncoder();
     try {
+        console.log(`Sending command "${command}"`);
         await bleCharacteristic.writeValue(encoder.encode(command));
         await new Promise((resolve) => setTimeout(resolve, 50));
     }
@@ -232,7 +288,7 @@ $(function() {
     setupSlider('sliderHeartSpO2',       0,  100, 10, 90);
     setupSlider('sliderBloodPressure1',  0,  300, 30, 90);
     setupSlider('sliderBloodPressure2',  0,  300, 30, 90);
-    setupSlider('sliderTemp',            30, 42,  1,  37);
+    setupSlider('sliderTemp',            30, 42,  1,  37, 0.5);
 
     targetState = sourceState;
     activateState();

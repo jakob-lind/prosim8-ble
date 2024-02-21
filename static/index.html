@@ -46,7 +46,7 @@
                     <div class="unit">bpm</div>
                 </div>
                 <div class="colorIndicator green"></div>
-                <div class="settingHeader">NSR Adult</div>
+                <div class="settingHeader" id="heartRateHeader">NSR Adult</div>
             </div>
             <div class="vertical-slider-container">
                 <div class="slider-values" id="sliderHeartRateAxis"></div>
@@ -54,7 +54,7 @@
             </div>
             <div class="divider"> </div>
             <div class="buttonContainer">
-                <button class="icon-button">
+                <button class="icon-button" onclick="openDialog('ecgDialog')">
                     <img src="iconSettings.svg" />
                 </button>
             </div>
@@ -67,7 +67,7 @@
                     <div class="unit">bpm</div>
                 </div>
                 <div class="colorIndicator blue"></div>
-                <div class="settingHeader">Normal</div>
+                <div class="settingHeader"></div>
             </div>
             <div class="vertical-slider-container">
                 <div class="slider-values" id="sliderRespiratoryRateAxis"></div>
@@ -75,11 +75,8 @@
             </div>
             <div class="divider"> </div>
             <div class="buttonContainer">
-                <button class="icon-button">
+                <button class="icon-button" style="visibility: hidden">
                     <img src="iconSettings.svg" />
-                </button>
-                <button class="icon-button">
-                    <img src="iconApnea.svg" />
                 </button>
             </div>
         </div>
@@ -91,7 +88,7 @@
                     <div class="unit">%</div>
                 </div>
                 <div class="colorIndicator orange"></div>
-                <div class="settingHeader">Ventilated</div>
+                <div class="settingHeader"></div>
             </div>
             <div class="vertical-slider-container">
                 <div class="slider-values" id="sliderHeartSpO2Axis"></div>
@@ -99,7 +96,7 @@
             </div>
             <div class="divider"> </div>
             <div class="buttonContainer">
-                <button class="icon-button">
+                <button class="icon-button" style="visibility: hidden">
                     <img src="iconSettings.svg" />
                 </button>
             </div>
@@ -136,14 +133,8 @@
             </div>
             <div class="divider"> </div>
             <div class="buttonContainer">
-                <button class="icon-button">
+                <button class="icon-button" style="visibility: hidden">
                     <img src="iconSettings.svg" />
-                </button>
-                <button class="icon-button">
-                    <img src="iconLink.svg" />
-                </button>
-                <button class="icon-button">
-                    <img src="iconZeroAdjust.svg" />
                 </button>
             </div>
         </div>
@@ -163,7 +154,7 @@
             </div>
             <div class="divider"> </div>
             <div class="buttonContainer">
-                <button class="icon-button" style="visibility:hidden">
+                <button class="icon-button" style="visibility: hidden">
                     <img src="iconSettings.svg" />
                 </button>
             </div>
@@ -183,7 +174,7 @@
                     <td>
                         <input type="number" id="trendTimeHours" value="0" min="0" />
                     </td><td>
-                        <input type="number" id="trendTimeMinutes" value="1" min="0" />
+                        <input type="number" id="trendTimeMinutes" value="0" min="0" />
                     </td><td>
                         <input type="number" id="trendTimeSeconds" value="0" min="0" />
                     </td>
@@ -201,16 +192,16 @@
             <div class="dialogTitle">ECG Settings</div>
             <div class="dialogSubTitle">Heart Rythm</div>
             <div class="dialogChoiceGroup">
-                <div class="dialogChoice">NSR Adult</div>
-                <div class="dialogChoice">NSR Pediatric</div>
-                <div class="dialogChoice">Atrial Flutter</div>
-                <div class="dialogChoice">Atrial Fibrillation</div>
-                <div class="dialogChoice">Sinus Arrhythmia</div>
-                <div class="dialogChoice">Supraventricular Tachycardia</div>
+                <div class="dialogChoice selected" id="ecgNsra" onclick="selectEcgMode('nsra')">NSR Adult</div>
+                <div class="dialogChoice" id="ecgNsrp" onclick="selectEcgMode('nsrp')">NSR Pediatric</div>
+                <div class="dialogChoice" id="ecgAfl" onclick="selectEcgMode('afl')">Atrial Flutter</div>
+                <div class="dialogChoice" id="ecgAfib" onclick="selectEcgMode('afib')">Atrial Fibrillation</div>
+                <div class="dialogChoice" id="ecgSna" onclick="selectEcgMode('sna')">Sinus Arrhythmia</div>
+                <div class="dialogChoice" id="ecgSvt" onclick="selectEcgMode('svt')">Supraventricular Tachycardia</div>
             </div>
             <div class="buttonGroup dialogButtonGroup">
-                <div class="button highlighted">OK</div>
-                <div class="button">Cancel</div>
+                <div class="button highlighted" onclick="closeDialog('ecgDialog', true)">OK</div>
+                <div class="button" onclick="closeDialog('ecgDialog')">Cancel</div>
             </div>
         </div>
     </div>

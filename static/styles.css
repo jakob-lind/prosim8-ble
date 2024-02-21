@@ -13,6 +13,7 @@
     --fhs-gray-gray-900: #2F323A;
     --fhs-gray-gray-1000: #14161A;
     --success-800: #257D69;
+    --fhs-primary-blue-600: #4DB8DA;
     --fhs-primary-blue-800: #2C7F96;
     --fhs-primary-blue-900: #2B6679;
 }
@@ -243,6 +244,10 @@ body {
 
 .sliderValue.dragging {
     color: var(--fhs-gray-gray-500);
+}
+
+.sliderValue.disabled {
+    color: var(--fhs-gray-gray-600);
 }
 
 .slider-values {
@@ -510,13 +515,13 @@ display: flex;
     align-items: center;
     visibility: hidden;
     position: absolute;
-    background: var(--fhs-gray-gray-1000);
+    background: #14161AE0;
     z-index: 100;
     color: var(--fhs-white);
 }
 
 .dialog input {
-    width: 3rem;
+    width: 3.5rem;
     font-size: 2rem
 }
 
@@ -553,9 +558,15 @@ display: flex;
 .dialogChoice {
     display: flex;
     align-items: center;
+    cursor: pointer;
     width: 15.7rem;
     height: 3rem;
     background: var(--fhs-gray-gray-800);
+    border: 1px solid transparent;
     border-radius: 0.5rem;
     padding-left: 1rem;
+}
+
+.dialogChoice.selected {
+    border: 1px solid var(--fhs-primary-blue-600);
 }
