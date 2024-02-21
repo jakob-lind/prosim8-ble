@@ -57,7 +57,9 @@ class ProSimService(Service):
                 return ""
     
     def check_serial(self):
-        if self.ser is None:
+        if self.ser is not None:
+            return True
+        else:
             try:
                 self.ser = serial.Serial(SERIAL_PATH, 115200, timeout=1, xonxoff=True)
                 self.send_command('REMOTE')
