@@ -14,6 +14,15 @@ let ecgMode = 'nsra';
 
 const zeroPad = (num, decimals, places) => String(num.toFixed(decimals)).padStart(places, '0')
 
+async function updateBloodPressure() {
+    const value1 = $('#sliderBloodPressure1').slider('value');
+    const value2 = $('#sliderBloodPressure2').slider('value');
+    const lo = Math.min(value1, value2);
+    const hi = Math.max(value1, value2);
+    // Set the NIBP dynamic pressure. Systolic pressure: unsigned 3 digits: 000 to 400. Diastolic pressure: unsigned 3 digits: 000 to 400
+    await sendCommand(`NIBPP=${zeroPad(hi, 0, 3)},${zeroPad(lo, 0, 3)}`);
+}
+
 const stateHandlers = {
     sliderHeartRate: async (value) => {
         switch (ecgMode) {
@@ -43,25 +52,17 @@ const stateHandlers = {
     sliderBloodPressure1: async (value) => {
         // Set an IBP channel to static pressure. Channel 1 or 2 followed by signed static pressure. 3 digits -010 to +300
         await sendCommand(`IBPS=1,+${zeroPad(value, 0, 3)}`);
-        await stateHandlers.updateBloodPressure();
+        await updateBloodPressure();
     },
     sliderBloodPressure2: async (value) => {
         // Set an IBP channel to static pressure. Channel 1 or 2 followed by signed static pressure. 3 digits -010 to +300
         await sendCommand(`IBPS=2,+${zeroPad(value, 0, 3)}`);
-        await stateHandlers.updateBloodPressure();
+        await updateBloodPressure();
     },
     sliderTemp: async (value) => {
         // Set the temparature. Degrees C, 3 digits w/dp: 30.0 to 42.0 [by 00.5]
         await sendCommand(`TEMP=${zeroPad(value, 1, 3)}`);
     },
-    updateBloodPressure: async () => {
-        const value1 = $('#sliderBloodPressure1').slider('value');
-        const value2 = $('#sliderBloodPressure2').slider('value');
-        const lo = Math.min(value1, value2);
-        const hi = Math.max(value1, value2);
-        // Set the NIBP dynamic pressure. Systolic pressure: unsigned 3 digits: 000 to 400. Diastolic pressure: unsigned 3 digits: 000 to 400
-        await sendCommand(`NIBPP=${zeroPad(hi, 0, 3)},${zeroPad(lo, 0, 3)}`);
-    }
 }
 
 async function connectBle() {
