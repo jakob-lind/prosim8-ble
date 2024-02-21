@@ -209,9 +209,7 @@ function refreshEcgMode() {
     const slider = $('#sliderHeartRate');
     const sliderValue = $('#sliderHeartRateValue');
     if (ecgMode === 'nsra' || ecgMode === 'nsrp') {
-        if (bleCharacteristic) {
-            slider.slider('enable');
-        }
+        slider.slider(bleCharacteristic ? 'enable' : 'disable');
         sliderValue.removeClass('disabled');
     } else {
         slider.slider('disable');
