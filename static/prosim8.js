@@ -99,8 +99,8 @@ async function trendState() {
         $(`#${sliderKey}`).slider('value', sourceState[sliderKey]);
         $(`#${sliderKey}`).slider('disable');
     }
-    $('#activateButton').css('visibility', 'hidden');
-    $('#trendButton').css('visibility', 'hidden');
+    $('#activateButton').css('display', 'none');
+    $('#trendButton').css('display', 'none');
     $('#trendTimer').css('display', 'block');
 
     if (trendTimer) {
@@ -114,6 +114,7 @@ async function trendState() {
         if (relTime >= 1) {
             for (sliderKey in targetState) {
                 $(`#${sliderKey}`).slider('value', targetState[sliderKey]);
+                $(`#${sliderKey}`).slider('enable');
             }
             $('#trendTimer').css('display', 'none');
             clearInterval(trendTimer);
@@ -131,8 +132,8 @@ async function trendState() {
 }
 
 function updateTargetState() {
-    $('#activateButton').css('visibility', 'visible');
-    $('#trendButton').css('visibility', 'visible');
+    $('#activateButton').css('display', 'block');
+    $('#trendButton').css('display', 'block');
 }
 
 function setupSlider(name, minValue, maxValue, diffAxis, startValue, step = 1) {
