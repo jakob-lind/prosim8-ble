@@ -515,6 +515,11 @@ display: flex;
     color: var(--fhs-white);
 }
 
+.dialog input {
+    width: 3rem;
+    font-size: 2rem
+}
+
 .dialogFrame {
     display: flex;
     flex-direction: column;

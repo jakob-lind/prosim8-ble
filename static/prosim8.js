@@ -96,14 +96,6 @@ function abortTrend() {
     activateState();
 }
 
-function openDialog(id) {
-    $(`#${id}`).css('visibility', 'visible');
-}
-
-function closeDialog(id) {
-    $(`#${id}`).css('visibility', 'hidden');
-}
-
 async function trendState(time) {
     trendDuration = time;
     const startTime = new Date().getTime();
@@ -115,7 +107,7 @@ async function trendState(time) {
     }
 
     const refreshTime = () => {
-        const time = (startTime + trendDuration) - new Date().getTime();
+        const time = ((startTime + trendDuration) - new Date().getTime()) + 1000;
         const seconds = Math.floor((time / 1000) % 60);
         const minutes = Math.floor((time / (1000 * 60)) % 60);
         const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
@@ -161,6 +153,28 @@ function updateTargetState() {
     $('#trendButton').css('display', 'flex');
 }
 
+function openDialog(id) {
+    $(`#${id}`).css('visibility', 'visible');
+}
+
+function closeDialog(id, ok = false) {
+    $(`#${id}`).css('visibility', 'hidden');
+    if (!ok) {
+        return;
+    }
+    switch (id) {
+        case 'trendDialog': {
+            const hours = parseInt($('#trendTimeHours').val());
+            const minutes = parseInt($('#trendTimeMinutes').val());
+            const seconds = parseInt($('#trendTimeSeconds').val());
+            const totalSeconds = (hours * 60 * 60) + (minutes * 60) + seconds;
+            trendState(totalSeconds * 1000);
+            break;
+        }
+    }
+}
+
+
 function setupSlider(name, minValue, maxValue, diffAxis, startValue, step = 1) {
     sourceState[name] = startValue;
 
@@ -199,7 +213,6 @@ function setupSlider(name, minValue, maxValue, diffAxis, startValue, step = 1) {
 
 async function sendCommand(command) {
     if (!bleCharacteristic) {
-        console.error("Not connected");
         return;
     }
     const encoder = new TextEncoder();
@@ -223,6 +236,4 @@ $(function() {
 
     targetState = sourceState;
     activateState();
-
-    openDialog('trendDialog');
 });

@@ -181,16 +181,16 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="text" id="trendTimeHours" style="width: 3rem; font-size: 2rem"/>
+                        <input type="number" id="trendTimeHours" value="0" min="0" />
                     </td><td>
-                        <input type="text" id="trendTimeMinutes" style="width: 3rem; font-size: 2rem" />
+                        <input type="number" id="trendTimeMinutes" value="1" min="0" />
                     </td><td>
-                        <input type="text" id="trendTimeSeconds" style="width: 3rem; font-size: 2rem" />
+                        <input type="number" id="trendTimeSeconds" value="0" min="0" />
                     </td>
                 </tr>
             </table>
             <div class="buttonGroup dialogButtonGroup">
-                <div class="button highlighted" onclick="closeDialog('trendDialog')">OK</div>
+                <div class="button highlighted" onclick="closeDialog('trendDialog', true)">OK</div>
                 <div class="button" onclick="closeDialog('trendDialog')">Cancel</div>
             </div>
         </div>
