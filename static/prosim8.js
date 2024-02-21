@@ -232,6 +232,7 @@ function selectEcgMode(mode = ecgMode) {
 
 function setupSlider(name, minValue, maxValue, diffAxis, startValue, step = 1) {
     sourceState[name] = startValue;
+    const slider = $(`#${name}`);
 
     const refreshValue = (value) => {
         if (step == 1) {
@@ -241,7 +242,7 @@ function setupSlider(name, minValue, maxValue, diffAxis, startValue, step = 1) {
         }
     }
 
-    $(`#${name}`).slider({
+    slider.slider({
         orientation: 'vertical',
         range: 'min',
         min: minValue,
@@ -255,6 +256,20 @@ function setupSlider(name, minValue, maxValue, diffAxis, startValue, step = 1) {
                 targetState[name] = ui.value;
                 updateTargetState();
             }
+        }
+    });
+    slider.on('touchmove', (event) => {
+        const clientRect = slider[0].getBoundingClientRect();
+        const yPos = Math.min(clientRect.height, Math.max(0, clientRect.bottom - event.touches[0].clientY));
+        const yRel = yPos / clientRect.height;
+        const sliderMin = slider.slider('option', 'min');
+        const sliderMax = slider.slider('option', 'max');
+        const sliderStep = slider.slider('option', 'step');
+        const sliderValue = slider.slider('value');
+        let value = sliderMin + (yRel * (sliderMax - sliderMin));
+        value = Math.floor((value / sliderStep) + 0.5) * sliderStep;
+        if (value !== sliderValue) {
+            slider.slider('value', value);
         }
     });
     refreshValue(startValue);
