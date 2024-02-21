@@ -72,14 +72,29 @@ async function activateState() {
     sourceState = { ...targetState };
     targetState = { };
 
-    $('#activateButton').css('visibility', 'hidden');
-    $('#trendButton').css('visibility', 'hidden');
+    $('#activateButton').css('display', 'none');
+    $('#trendButton').css('display', 'none');
 
     if (bleCharacteristic) {
         for (sliderKey in sourceState) {
             $(`#${sliderKey}`).slider('enable');
         }
     }
+}
+
+function abortTrend() {
+    $('#activateButton').css('display', 'none');
+    $('#trendButton').css('display', 'none');
+    $('#trendTimer').css('display', 'none');
+
+    clearTimeout(trendTimer);
+    trendActive = false;
+
+    for (const sliderKey in sourceState) {
+        targetState[sliderKey] = $(`#${sliderKey}`).slider('value');
+        $(`#${sliderKey}`).slider('enable');
+    }
+    activateState();
 }
 
 function openDialog(id) {
@@ -99,6 +114,16 @@ async function trendState() {
         $(`#${sliderKey}`).slider('value', sourceState[sliderKey]);
         $(`#${sliderKey}`).slider('disable');
     }
+
+    const refreshTime = () => {
+        const time = (startTime + trendDuration) - new Date().getTime();
+        const seconds = Math.floor((time / 1000) % 60);
+        const minutes = Math.floor((time / (1000 * 60)) % 60);
+        const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+        $('#trendTimerText').html(`${hours}:${zeroPad(minutes, 0, 2)}:${zeroPad(seconds, 0, 2)}`);
+    }
+    refreshTime();
+
     $('#activateButton').css('display', 'none');
     $('#trendButton').css('display', 'none');
     $('#trendTimer').css('display', 'block');
@@ -126,14 +151,15 @@ async function trendState() {
                 const value = ((1 - relTime) * sourceValue) + (relTime * targetValue);
                 $(`#${sliderKey}`).slider('value', value);
                 stateHandlers[sliderKey](value);
+                refreshTime();
             }
         }
     }, trendInterval);
 }
 
 function updateTargetState() {
-    $('#activateButton').css('display', 'block');
-    $('#trendButton').css('display', 'block');
+    $('#activateButton').css('display', 'flex');
+    $('#trendButton').css('display', 'flex');
 }
 
 function setupSlider(name, minValue, maxValue, diffAxis, startValue, step = 1) {
