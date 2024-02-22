@@ -17,10 +17,8 @@ const zeroPad = (num, decimals, places) => String(num.toFixed(decimals)).padStar
 async function updateBloodPressure() {
     const value1 = $('#sliderBloodPressure1').slider('value');
     const value2 = $('#sliderBloodPressure2').slider('value');
-    const lo = Math.min(value1, value2);
-    const hi = Math.max(value1, value2);
     // Set the NIBP dynamic pressure. Systolic pressure: unsigned 3 digits: 000 to 400. Diastolic pressure: unsigned 3 digits: 000 to 400
-    await sendCommand(`NIBPP=${zeroPad(hi, 0, 3)},${zeroPad(lo, 0, 3)}`);
+    await sendCommand(`NIBPP=${zeroPad(value1, 0, 3)},${zeroPad(value2, 0, 3)}`);
 }
 
 const stateHandlers = {
