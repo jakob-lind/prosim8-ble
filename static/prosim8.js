@@ -12,7 +12,7 @@ let sourceState = { };
 let targetState = { };
 let ecgMode = 'nsra';
 
-const zeroPad = (num, decimals, places) => String(num.toFixed(decimals)).padStart(places, '0')
+const zeroPad = (num, decimals, places) => String(num.toFixed(decimals)).padStart(places, '0');
 
 async function updateBloodPressure() {
     const value1 = $('#sliderBloodPressure1').slider('value');
@@ -300,7 +300,7 @@ async function sendCommand(command) {
 $(function() {
     // Document is ready to be manipulated
 
-    setupSlider('sliderHeartRate',       10, 240, 20, 70);
+    setupSlider('sliderHeartRate',       0,  240, 20, 70);
     setupSlider('sliderRespiratoryRate', 10, 150, 10, 50);
     setupSlider('sliderHeartSpO2',       0,  100, 10, 90);
     setupSlider('sliderBloodPressure1',  0,  300, 30, 90);
