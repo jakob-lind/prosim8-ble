@@ -36,7 +36,7 @@ const stateHandlers = {
             case 'svt':
                 await sendCommand(`SPVWAVE=${ecgMode.toUpperCase()}`);
                 break;
-            case 'afi':
+            case 'afib':
                 await sendCommand('AFIB=COARSE');
                 break;
         }
